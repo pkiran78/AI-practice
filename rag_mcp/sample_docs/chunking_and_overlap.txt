@@ -1,0 +1,13 @@
+Chunking is splitting long documents into smaller pieces so retrieval can find the most relevant parts.
+
+Why overlap helps:
+- Important information can sit on the boundary between two chunks.
+- Overlap reduces the chance that the key sentence gets split away from its context.
+
+Common chunking strategies:
+- Fixed token/window size with overlap
+- Split by headings, paragraphs, or semantic boundaries
+
+A practical heuristic:
+- Start with ~300-800 tokens per chunk
+- 10% to 20% overlap

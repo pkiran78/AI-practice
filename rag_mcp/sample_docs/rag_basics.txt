@@ -1,0 +1,12 @@
+RAG (Retrieval-Augmented Generation) is a pattern where you retrieve relevant documents and give them to a language model as context before it answers.
+
+Core idea:
+- The model is good at reasoning and natural language.
+- Retrieval supplies factual, up-to-date, or private knowledge.
+
+Typical steps:
+1) Ingest documents
+2) Chunk documents into smaller passages (often with overlap)
+3) Create embeddings (vector representations) for each chunk
+4) Retrieve top-k chunks for a query (vector similarity)
+5) Provide retrieved chunks to the LLM and ask it to answer grounded in them.

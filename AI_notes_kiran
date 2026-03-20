@@ -1,0 +1,69 @@
+
+## RAG Flow
+
+### Index-time (offline)
+[1] Load docs (PDF/MD/HTML/DB)
+[2] Clean text (remove nav, boilerplate)
+[3] Chunk (with overlap + metadata)
+[4] Embed chunks (embedding model)
+[5] Store in VectorDB (vector + text + metadata)
+Query-time (online)
+[1] User question
+[2] Embed query
+[3] Retrieve top‑k chunks from VectorDB
+[4] (Optional) Rerank the top‑k (higher precision)
+[5] Build prompt with context + rules (“cite sources”)
+[6] Generate answer
+[7] Return answer + citations
+
+## MCP: 
+MCP is like a function call that can be invoked by an LLM. The LLM decides when to call the function and what parameters to pass to it.
+
+Actually to call MCP, there are Two common RAG policies:
+1. Retrieve-then-read (always retrieve): Always call retriever first
+    This approach is used when your answers to be backed by your docs.
+
+2. Decide-then-retrieve (retrieve only when needed): Ask LLM: “Do you need retrieval?” If yes → call retriever
+If no -> answer directly
+    This approach is used when you have many heterogeneous tools like calendar, email, etc.
+
+## Agentic RAG:
+
+LLM can decide:
+    whether to call tools
+    how many times to call tools
+    whether to retrieve from RAG
+    whether to generate answer directly
+
+## Agentic RAG patterns:
+
+1. Query rewriting:
+    - LLM calls retriever
+    - sees weak results
+    - rewrites query
+    - calls retriever again
+    - returns answer
+
+2. Self ask decomposition:
+    - For complex questions, break into subquestions
+    - Answer each subquestion
+    - Combine answers
+    - returns answer
+
+3. Tool routing:
+    - LLM decides which tool to call
+    - Calls tool
+    - Returns answer
+
+## Guardrails:
+
+1. Retrieval requirement:
+    - If user asks a question regarding docs, always retrieve from RAG
+2. Max tools call limit:
+    - If user asks a question that requires multiple tools, limit the number of tool calls to 3
+3. Tool call timeout:
+    - If a tool call takes more than 5 seconds, timeout and return error
+4. Citation checks:
+    - If a tool call returns a citation, check if it is from the docs
+    - If not, return error
+

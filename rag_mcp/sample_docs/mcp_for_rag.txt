@@ -1,0 +1,14 @@
+MCP (Model Context Protocol) can be used to expose parts of a RAG system as tools.
+
+Common pattern:
+- An MCP server hosts retrieval tools like: list_sources, index, search, fetch_chunk.
+- A client (chat app) uses an LLM and calls those tools when it needs context.
+
+Benefits:
+- Decouples the retriever/index from the chat UI.
+- Multiple clients can reuse the same retrieval server.
+- You can add governance: access control, logging, rate limits, and tool versioning.
+
+In other words:
+- RAG is the technique.
+- MCP is a clean way to package retrieval as reusable tools.
