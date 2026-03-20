@@ -85,3 +85,5 @@ but internally, tool calls go through the MCP protocol to a separate server proc
 
 3. **Try the same prompts** in both approaches to see identical behavior
    with different architectures.
+
+4. Sample push
